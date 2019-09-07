@@ -1,5 +1,5 @@
-Still have to do:
--error handling on frontend
+Still have to do:<br>
+-error handling on frontend<br>
 -disappear when everything is alright and reset timer
 
 ## Magic Feedback

@@ -27,7 +27,6 @@ const Popup = ({ feedback }) => {
     <div className='popup'>
       <div className='info-popup'>
         <h1>Puneti parola pentru a proceda:</h1>
-        {/* <form action=''> */}
         <input
           id='password'
           type='password'
@@ -40,7 +39,6 @@ const Popup = ({ feedback }) => {
           onClick={() => postAction(pass)}>
           Submit
         </button>
-        {/* </form> */}
         <ReactStopwatch
           seconds={0}
           minutes={0}
