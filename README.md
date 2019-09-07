@@ -1,6 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Still have to do:
+-error handling on frontend
+-disappear when everything is alright and reset timer
 
-## Available Scripts
+## Magic Feedback
 
 In the project directory, you can run:
 
