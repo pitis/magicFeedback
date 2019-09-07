@@ -120,3 +120,33 @@ i {
   margin-bottom: -2%;
   margin-left: -2%;
 }
+
+@media only screen and (max-width: 768px) {
+  * {
+    font-size: 16px;
+  }
+
+  header {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header p {
+    width: 100%;
+    margin: 0;
+  }
+
+  .btn-primary {
+    font-size: 1rem;
+  }
+
+  i {
+    font-size: 3rem;
+  }
+
+  .info-popup {
+    width: 80%;
+  }
+}
