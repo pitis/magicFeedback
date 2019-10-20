@@ -9,6 +9,9 @@ const App = () => {
     setFeedbackType(data)
   }
 
+  const handleChange = () => {
+    setFeedbackType('')
+  }
   return (
     <div className='App'>
       <header>
@@ -29,7 +32,9 @@ const App = () => {
           <i className='fas fa-toilet'></i>WC Murdar
         </button>
       </div>
-      {feedbackType && <Popup feedback={feedbackType} />}
+      {feedbackType && (
+        <Popup feedback={feedbackType} handleChange={handleChange} />
+      )}
     </div>
   )
 }

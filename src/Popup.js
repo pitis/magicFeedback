@@ -1,14 +1,33 @@
-import React, { useState } from 'react'
-import ReactStopwatch from 'react-stopwatch'
+import React, { useState, useEffect } from 'react'
+import { useStopwatch } from './customHooks'
 import axios from 'axios'
 
-const Popup = ({ feedback }) => {
+const Popup = ({ feedback, handleChange }) => {
   const [pass, setPass] = useState()
-  let doneDate = new Date()
+  const [startedAt, setStartedAt] = useState(new Date())
+  const [finishedAt, setFinishedAt] = useState()
+
+  const {
+    isRunning,
+    elapsedTime,
+    startTimer,
+    stopTimer,
+    resetTimer
+  } = useStopwatch()
+
+  const handleStartStop = () => {
+    isRunning ? stopTimer() : startTimer()
+  }
 
   const postAction = pass => {
     if (pass === '0000') {
       console.log('post successful')
+      setFinishedAt(new Date())
+      console.log({
+        feedback,
+        durata: showFormattedTime(new Date() / 1000 - startedAt / 1000)
+      })
+      handleChange()
       // axios
       //   .post('/endpoint', {
       //     feedback,
@@ -18,10 +37,44 @@ const Popup = ({ feedback }) => {
       //   .catch(err => {
       //     console.error(err)
       //   })
+      resetTimer()
     } else {
       console.error('wrong pass kiddo')
     }
   }
+
+  const formattedHours = timeInSeconds => {
+    return Math.floor(timeInSeconds / 3600)
+  }
+
+  const formattedMins = timeInSeconds => {
+    return Math.floor((timeInSeconds % 3600) / 60)
+  }
+
+  const formattedSecs = timeInSeconds => {
+    return Math.floor((timeInSeconds % 3600) % 60)
+  }
+
+  const showFormattedTime = timeInSeconds => {
+    let finalHours = formattedHours(timeInSeconds)
+    let finalMinutes = formattedMins(timeInSeconds)
+    let finalSeconds = formattedSecs(timeInSeconds)
+    if (finalHours <= 9) {
+      finalHours = '0' + finalHours
+    }
+    if (finalMinutes <= 9) {
+      finalMinutes = '0' + finalMinutes
+    }
+    if (finalSeconds <= 9) {
+      finalSeconds = '0' + finalSeconds
+    }
+
+    return `${finalHours}:${finalMinutes}:${finalSeconds}`
+  }
+
+  useEffect(() => {
+    handleStartStop()
+  }, [])
 
   return (
     <div className='popup'>
@@ -30,7 +83,7 @@ const Popup = ({ feedback }) => {
         <input
           id='password'
           type='password'
-          maxlength='4'
+          maxLength='4'
           onChange={e => setPass(e.target.value)}
         />
         <button
@@ -39,25 +92,7 @@ const Popup = ({ feedback }) => {
           onClick={() => postAction(pass)}>
           Submit
         </button>
-        <ReactStopwatch
-          seconds={0}
-          minutes={0}
-          hours={0}
-          limit='24:00:00'
-          onChange={({ hours, minutes, seconds }) => {
-            doneDate.setHours(hours)
-            doneDate.setMinutes(minutes)
-            doneDate.setSeconds(seconds)
-          }}
-          onCallback={() => console.log('Finish')}
-          render={({ formatted, hours, minutes, seconds }) => {
-            return (
-              <div>
-                <p>{formatted}</p>
-              </div>
-            )
-          }}
-        />
+        <p>{showFormattedTime(elapsedTime)}</p>
       </div>
     </div>
   )
