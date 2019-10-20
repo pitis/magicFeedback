@@ -1,0 +1,7 @@
+{
+  "appId": "io.ionic.magicfeedback",
+  "appName": "Magic Feedback",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build"
+}

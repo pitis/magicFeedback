@@ -1,6 +1,9 @@
-Still have to do:<br>
--error handling on frontend<br>
--disappear when everything is alright and reset timer
+-To do:
+add a message if pass is good or not
+
+To run the app in Android Studio run the following commands in root:
+ionic capacitor copy
+ionic capacitor android
 
 ## Magic Feedback
 

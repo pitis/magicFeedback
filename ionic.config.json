@@ -1,0 +1,7 @@
+{
+  "name": "Magic Feedback",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
